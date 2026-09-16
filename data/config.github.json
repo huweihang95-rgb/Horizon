@@ -16,8 +16,12 @@
   },
   "processing": {
     "profiles_dir": "profiles",
-    "default_profile": "tech-news",
+    "default_profile": "ai-creator",
     "profile_settings": {
+      "ai-creator": {
+        "threshold": 7.0,
+        "topic_dedup": true
+      },
       "tech-news": {
         "threshold": 7.0,
         "topic_dedup": true
@@ -38,35 +42,35 @@
         "type": "user_events",
         "username": "karpathy",
         "enabled": true,
-        "profile": "tech-news"
+        "profile": "ai-creator"
       },
       {
         "type": "repo_releases",
         "owner": "vllm-project",
         "repo": "vllm",
         "enabled": true,
-        "profile": "tech-news"
+        "profile": "ai-creator"
       },
       {
         "type": "repo_releases",
         "owner": "sgl-project",
         "repo": "sglang",
         "enabled": true,
-        "profile": "tech-news"
+        "profile": "ai-creator"
       },
       {
         "type": "repo_releases",
         "owner": "triton-lang",
         "repo": "triton",
         "enabled": true,
-        "profile": "tech-news"
+        "profile": "ai-creator"
       }
     ],
     "hackernews": {
       "enabled": true,
       "fetch_top_stories": 30,
-      "min_score": 150,
-      "profile": "tech-news"
+      "min_score": 100,
+      "profile": "ai-creator"
     },
     "rss": [
       {
@@ -74,30 +78,30 @@
         "url": "https://simonwillison.net/atom/everything/",
         "enabled": true,
         "category": "ai-tools",
-        "profile": "tech-news"
+        "profile": "ai-creator"
       },
       {
         "name": "vLLM Blog",
         "url": "https://vllm.ai/blog/rss.xml",
         "enabled": true,
         "category": "llm-inference",
-        "profile": "tech-blog",
+        "profile": "ai-creator",
         "content_extractor": "trafilatura"
       },
       {
         "name": "Sean Goedecke",
         "url": "https://www.seangoedecke.com/rss.xml",
-        "enabled": true,
+        "enabled": false,
         "category": "software-engineering",
-        "profile": "tech-blog",
+        "profile": "ai-creator",
         "content_extractor": "trafilatura"
       },
       {
         "name": "CNBC Finance",
         "url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000664",
-        "enabled": true,
+        "enabled": false,
         "category": "finance",
-        "profile": "finance-news",
+        "profile": "ai-creator",
         "content_extractor": "trafilatura"
       },
       {
@@ -105,21 +109,29 @@
         "url": "https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml",
         "enabled": true,
         "category": "github-trending",
-        "profile": "tech-news"
+        "profile": "ai-creator"
       },
       {
         "name": "Semianalysis",
         "url": "https://newsletter.semianalysis.com/feed",
         "enabled": true,
         "category": "semiconductors",
-        "profile": "tech-news"
+        "profile": "ai-creator"
+      },
+      {
+        "name": "NVIDIA CUDA Technical Blog",
+        "url": "https://developer.nvidia.com/blog/tag/cuda/feed/",
+        "enabled": true,
+        "category": "ai-hardware",
+        "profile": "ai-creator",
+        "content_extractor": "trafilatura"
       },
       {
         "name": "LWN.net",
         "url": "https://lwn.net/headlines/full_text?key=${LWN_KEY}",
         "enabled": false,
         "category": "linux-kernel",
-        "profile": "tech-news"
+        "profile": "ai-creator"
       }
     ],
     "reddit": {
@@ -130,31 +142,65 @@
           "enabled": true,
           "sort": "hot",
           "time_filter": "day",
-          "fetch_limit": 10,
+          "fetch_limit": 15,
           "min_score": 60,
-          "profile": "tech-news"
+          "profile": "ai-creator"
         },
         {
           "subreddit": "LocalLLaMA",
           "enabled": true,
           "sort": "hot",
           "time_filter": "day",
-          "fetch_limit": 10,
+          "fetch_limit": 15,
           "min_score": 60,
-          "profile": "tech-news"
+          "profile": "ai-creator"
         }
       ],
       "users": [],
       "fetch_comments": 10
     },
-    "telegram": {
+    "ossinsight": {
       "enabled": true,
+      "period": "past_24_hours",
+      "languages": [
+        "All",
+        "Python",
+        "TypeScript"
+      ],
+      "keywords": [
+        "llm",
+        "agent",
+        "rag",
+        "mcp",
+        "diffusion",
+        "transformer",
+        "generative",
+        "artificial intelligence",
+        "machine learning"
+      ],
+      "min_stars": 10,
+      "max_items": 20,
+      "category": "ai-open-source",
+      "profile": "ai-creator"
+    },
+    "google_news": {
+      "enabled": true,
+      "query": "\"artificial intelligence\" OR OpenAI OR Anthropic OR Gemini OR Claude OR \"AI agent\" OR NVIDIA",
+      "language": "en",
+      "country": "US",
+      "ceid": null,
+      "max_results": 40,
+      "category": "ai-news",
+      "profile": "ai-creator"
+    },
+    "telegram": {
+      "enabled": false,
       "channels": [
         {
           "channel": "zaihuapd",
-          "enabled": true,
+          "enabled": false,
           "fetch_limit": 20,
-          "profile": ["tech-news", "finance-news"]
+          "profile": "ai-creator"
         }
       ]
     }
@@ -163,11 +209,9 @@
     "time_window_hours": 24
   },
   "digest": {
-    "max_items": null,
+    "max_items": 20,
     "profile_order": [
-      "tech-news",
-      "tech-blog",
-      "finance-news"
+      "ai-creator"
     ],
     "category_groups": {},
     "default_group": "other",
